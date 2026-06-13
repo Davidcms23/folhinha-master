@@ -2,14 +2,14 @@
 const TOTAL_DAYS = 30;
 
 let done = [];
-try { done = JSON.parse(localStorage.getItem('probpath_done') || '[]'); } catch (e) {}
+try { done = JSON.parse(localStorage.getItem('folhinha_done') || '[]'); } catch (e) {}
 
 let curDay  = null;
 let curCard = 0;
 
 /* ── Persistence ─────────────────────────────────────── */
 function save() {
-  try { localStorage.setItem('probpath_done', JSON.stringify(done)); } catch (e) {}
+  try { localStorage.setItem('folhinha_done', JSON.stringify(done)); } catch (e) {}
 }
 
 /* ── Grid ────────────────────────────────────────────── */
