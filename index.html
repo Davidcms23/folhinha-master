@@ -1,136 +1,164 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="pt-BR">
-<head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Masterizando a Folhinha</title>
-  <meta name="description" content="Trilha de 30 dias de flashcards para memorizar distribuições de probabilidade no Anki." />
-  <link rel="stylesheet" href="style.css" />
+    <head>
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <title>Masterizando a Folhinha</title>
+        <meta
+            name="description"
+            content="Trilha de 30 dias de flashcards para memorizar distribuições de probabilidade no Anki."
+        />
+        <link rel="stylesheet" href="style.css" />
 
-  <!-- MathJax -->
-  <script>
-    window.MathJax = {
-      tex: {
-        inlineMath: [['\\(', '\\)']],
-        displayMath: [['\\[', '\\]']]
-      },
-      startup: {
-        ready() { MathJax.startup.defaultReady(); }
-      }
-    };
-  </script>
-  <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml.js" defer></script>
-</head>
-<body>
+        <!-- MathJax -->
+        <script>
+            window.MathJax = {
+                tex: {
+                    inlineMath: [["\\(", "\\)"]],
+                    displayMath: [["\\[", "\\]"]],
+                },
+                startup: {
+                    ready() {
+                        MathJax.startup.defaultReady();
+                    },
+                },
+            };
+        </script>
+        <script
+            src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml.js"
+            defer
+        ></script>
+    </head>
+    <body>
+        <!-- ── Navbar ───────────────────────────────── -->
+        <nav class="navbar" role="navigation" aria-label="Principal">
+            <a href="index.html" class="nav-brand">
+                <svg
+                    width="18"
+                    height="18"
+                    viewBox="0 0 100 120"
+                    xmlns="http://www.w3.org/2000/svg"
+                >
+                    <!-- Integral (atrás) -->
+                    <text
+                        x="55"
+                        y="95"
+                        text-anchor="middle"
+                        font-size="115"
+                        font-family="Georgia, serif"
+                        fill="#4A90D9"
+                    >
+                        ∫
+                    </text>
 
-  <!-- ── Navbar ───────────────────────────────── -->
-  <nav class="navbar" role="navigation" aria-label="Principal">
-    <a href="index.html" class="nav-brand">
-      <svg width="18" height="18" viewBox="0 0 24 24" fill="none"
-           stroke="currentColor" stroke-width="1.8" stroke-linecap="round"
-           stroke-linejoin="round" aria-hidden="true">
-        <path d="M3 3v18h18"/>
-        <path d="M7 16l4-4 4 4 4-6"/>
-      </svg>
-      FMaster
-    </a>
-    <div class="nav-links">
-      <a href="index.html" class="nav-link active">Início</a>
-      <a href="about.html" class="nav-link">Sobre</a>
-      <a href="anki-setup.html" class="nav-link">Baralho</a>
-    </div>
-  </nav>
+                    <!-- Somatório (na frente) -->
+                    <text
+                        x="50"
+                        y="88"
+                        text-anchor="middle"
+                        font-size="100"
+                        font-family="Georgia, serif"
+                        fill="currentColor"
+                    >
+                        ∑
+                    </text>
+                </svg>
+                FMaster
+            </a>
+            <div class="nav-links">
+                <a href="index.html" class="nav-link active">Início</a>
+                <a href="anki-setup.html" class="nav-link">Baralho</a>
+                <a href="about.html" class="nav-link">Sobre</a>
+            </div>
+        </nav>
 
-  <!-- ── Main ─────────────────────────────────── -->
-  <main class="main">
-    <h1 class="page-title">Folhinha Master</h1>
+        <!-- ── Main ─────────────────────────────────── -->
+        <main class="main">
+            <h1 class="page-title">Folhinha Master</h1>
 
-    <!-- Progress -->
-    <div class="progress-row">
-      <span class="progress-label" id="prog-label">Progresso: Dia 1 de 3*</span>
-      <div class="progress-track">
-        <div class="progress-fill" id="prog-fill" style="width:0%"></div>
-      </div>
-    </div>
+            <!-- Progress -->
+            <div class="progress-row">
+                <span class="progress-label" id="prog-label"
+                    >Progresso: Dia 1 de 3*</span
+                >
+                <div class="progress-track">
+                    <div
+                        class="progress-fill"
+                        id="prog-fill"
+                        style="width: 0%"
+                    ></div>
+                </div>
+            </div>
 
-    <!-- Days grid -->
-    <div class="days-grid" id="days-grid" role="list" aria-label="Dias da trilha"></div>
+            <!-- Days grid -->
+            <div
+                class="days-grid"
+                id="days-grid"
+                role="list"
+                aria-label="Dias da trilha"
+            ></div>
 
-    <!-- Card panel -->
-    <section class="panel" id="panel" aria-live="polite">
-      <div class="panel-header">
-        <div class="panel-title-row">
-          <span class="panel-title" id="panel-title">—</span>
-          <span class="tag" id="panel-tag"></span>
-        </div>
-        <div class="panel-nav">
-          <span class="card-counter" id="card-counter" aria-label="Card atual"></span>
-          <button class="nav-btn" id="btn-prev" onclick="prevCard()" aria-label="Card anterior">&#8249;</button>
-          <button class="nav-btn" id="btn-next" onclick="nextCard()" aria-label="Próximo card">&#8250;</button>
-        </div>
-      </div>
+            <section class="panel" id="panel" aria-live="polite">
+              <style>
+                .fc-wrap { display: flex; flex-direction: column; align-items: center; gap: 24px; padding: 2rem 0; }
+                .fc-nav { display: flex; align-items: center; gap: 16px; }
+                .fc-nav button { background: #1e1e1e; border: 0.5px solid #3a3a3a; color: #e0e0e0; width: 40px; height: 40px; border-radius: 50%; font-size: 20px; cursor: pointer; display: flex; align-items: center; justify-content: center; transition: background 0.15s; }
+                .fc-nav button:hover { background: #2a2a2a; }
+                .fc-counter { font-size: 13px; color: #888; min-width: 48px; text-align: center; }
+                .fc-scene { width: 420px; height: 260px; perspective: 1000px; cursor: pointer; }
+                .fc-card { width: 100%; height: 100%; position: relative; transform-style: preserve-3d; transition: transform 0.55s cubic-bezier(.4,0,.2,1); }
+                .fc-card.flipped { transform: rotateY(180deg); }
+                .fc-face { position: absolute; width: 100%; height: 100%; backface-visibility: hidden; border-radius: 16px; display: flex; flex-direction: column; align-items: center; justify-content: center; padding: 2rem; box-sizing: border-box; }
+                .fc-front { background: #1a1a1a; border: 0.5px solid #333; }
+                .fc-back { background: #1e2a1e; border: 0.5px solid #2d4a2d; transform: rotateY(180deg); }
+                .fc-label { font-size: 11px; letter-spacing: 0.08em; text-transform: uppercase; margin-bottom: 16px; }
+                .fc-front .fc-label { color: #555; }
+                .fc-back .fc-label { color: #4a8a4a; }
+                .fc-text { font-size: 16px; font-weight: 500; color: #e8e8e8; text-align: center; line-height: 1.6; }
+                .fc-back .fc-text { color: #c8e8c8; }
+                .fc-hint { font-size: 12px; color: #444; margin-top: 20px; }
+              </style>
 
-      <div class="card-body">
-        <div class="card-side">
-          <div class="side-label">
-            <span class="dot" aria-hidden="true"></span> Front
-          </div>
-          <div class="card-question" id="card-q"></div>
-        </div>
-        <div class="card-side">
-          <div class="side-label">
-            <span class="dot green" aria-hidden="true"></span> Back
-          </div>
-          <div class="card-answer" id="card-a"></div>
-        </div>
-      </div>
+              <div class="fc-wrap" id="fc-wrap" style="display:none">
+                <div class="fc-scene" onclick="flipCard()" id="fc-scene">
+                  <div class="fc-card" id="fc-card">
+                    <div class="fc-face fc-front">
+                      <span class="fc-label">pergunta</span>
+                      <p class="fc-text" id="card-q"></p>
+                      <span class="fc-hint">clique para revelar</span>
+                    </div>
+                    <div class="fc-face fc-back">
+                      <span class="fc-label">resposta</span>
+                      <p class="fc-text" id="card-a"></p>
+                    </div>
+                  </div>
+                </div>
 
-      <div class="card-footer">
-        <div class="copy-grp">
-          <button class="copy-btn" id="btn-copy-anki" onclick="copyAnki(this)">
-            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor"
-                 stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
-              <rect x="9" y="9" width="13" height="13" rx="2"/>
-              <path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/>
-            </svg>
-            Copy Anki text (LaTeX included)
-          </button>
-          <button class="copy-btn" id="btn-copy-latex" onclick="copyLatex(this)">
-            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor"
-                 stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
-              <polyline points="16 18 22 12 16 6"/>
-              <polyline points="8 6 2 12 8 18"/>
-            </svg>
-            LaTeX only
-          </button>
-        </div>
-        <button class="done-btn" id="done-btn" onclick="markDone()">
-          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor"
-               stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
-            <circle cx="12" cy="12" r="10"/>
-            <polyline points="9 12 11 14 15 10"/>
-          </svg>
-          Mark day as done
-        </button>
-      </div>
-    </section>
+                <div class="fc-nav">
+                  <button onclick="prevCard()" aria-label="Card anterior">&#8249;</button>
+                  <span class="fc-counter" id="card-counter"></span>
+                  <button onclick="nextCard()" aria-label="Próximo card">&#8250;</button>
+                </div>
+              </div>
+            </section>
 
-    <!-- Empty state -->
-    <div class="empty-state" id="empty-state" role="status">
-      ← Clique em um dia para ver os cards
-    </div>
-  </main>
+            <!-- Empty state -->
+            <div class="empty-state" id="empty-state" role="status">
+              ← Clique em um dia para ver os cards
+            </div>
 
-  <!-- ── Footer ───────────────────────────────── -->
-  <footer class="site-footer">
-    <p>
-      Repository
-      <a href="https://github.com/" target="_blank" rel="noopener">GitHub</a>
-      &nbsp;·&nbsp; Copyright &copy; 2025
-    </p>
-  </footer>
+        <!-- ── Footer ───────────────────────────────── -->
+        <footer class="site-footer">
+            <p>
+                Repository
+                <a href="https://github.com/" target="_blank" rel="noopener"
+                    >GitHub</a
+                >
+                &nbsp;·&nbsp; Copyright &copy; 2025
+            </p>
+        </footer>
 
-  <script src="cards.js"></script>
-  <script src="app.js"></script>
-</body>
+        <script src="cards.js"></script>
+        <script src="app.js"></script>
+    </body>
 </html>

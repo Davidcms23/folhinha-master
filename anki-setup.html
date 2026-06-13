@@ -1,87 +1,187 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="pt-BR">
-<head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Masterizando a Folhinha</title>
-  <link rel="stylesheet" href="style.css" />
-</head>
-<body>
+    <head>
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <title>Masterizando a Folhinha</title>
+        <link rel="stylesheet" href="style.css" />
+    </head>
+    <body>
+        <nav class="navbar" role="navigation" aria-label="Principal">
+            <a href="index.html" class="nav-brand">
+                <svg
+                    width="18"
+                    height="18"
+                    viewBox="0 0 100 120"
+                    xmlns="http://www.w3.org/2000/svg"
+                >
+                    <!-- Integral (atrás) -->
+                    <text
+                        x="55"
+                        y="95"
+                        text-anchor="middle"
+                        font-size="115"
+                        font-family="Georgia, serif"
+                        fill="#4A90D9"
+                    >
+                        ∫
+                    </text>
 
-  <nav class="navbar" role="navigation" aria-label="Principal">
-    <a href="index.html" class="nav-brand">
-      <svg width="18" height="18" viewBox="0 0 24 24" fill="none"
-           stroke="currentColor" stroke-width="1.8" stroke-linecap="round"
-           stroke-linejoin="round" aria-hidden="true">
-        <path d="M3 3v18h18"/>
-        <path d="M7 16l4-4 4 4 4-6"/>
-      </svg>
-      FMaster
-    </a>
-    <div class="nav-links">
-      <a href="index.html" class="nav-link">Início</a>
-      <a href="about.html" class="nav-link">Sobre</a>
-      <a href="anki-setup.html" class="nav-link active">Baralho</a>
-    </div>
-  </nav>
+                    <!-- Somatório (na frente) -->
+                    <text
+                        x="50"
+                        y="88"
+                        text-anchor="middle"
+                        font-size="100"
+                        font-family="Georgia, serif"
+                        fill="currentColor"
+                    >
+                        ∑
+                    </text>
+                </svg>
+                FMaster
+            </a>
+            <div class="nav-links">
+                <a href="index.html" class="nav-link">Início</a>
+                <a href="anki-setup.html" class="nav-link active">Baralho</a>
+                <a href="about.html" class="nav-link">Sobre</a>
+            </div>
+        </nav>
 
-  <main class="main" style="max-width:640px">
-    <h1 class="page-title" style="margin-bottom:20px">Como configurar o Anki</h1>
+        <main class="main" style="max-width: 640px">
+            <h1 class="page-title" style="margin-bottom: 20px">
+                Como configurar o Anki
+            </h1>
 
-    <div style="font-size:15px;line-height:1.8;color:var(--text)">
+            <div style="font-size: 15px; line-height: 1.8; color: var(--text)">
+                <h2
+                    style="
+                        font-size: 16px;
+                        font-weight: 500;
+                        margin-bottom: 10px;
+                    "
+                >
+                    1. Instalar o addon MathJax
+                </h2>
+                <p style="margin-bottom: 16px">
+                    Para renderizar LaTeX nos cards, instale o addon
+                    <a
+                        href="https://ankiweb.net/shared/info/1280253613"
+                        target="_blank"
+                        rel="noopener"
+                    >
+                        MathJax for Anki (ID: 1280253613)
+                    </a>
+                    via
+                    <em>Ferramentas → Complementos → Obter complementos</em>.
+                </p>
 
-      <h2 style="font-size:16px;font-weight:500;margin-bottom:10px">1. Instalar o addon MathJax</h2>
-      <p style="margin-bottom:16px">
-        Para renderizar LaTeX nos cards, instale o addon
-        <a href="https://ankiweb.net/shared/info/1280253613" target="_blank" rel="noopener">
-          MathJax for Anki (ID: 1280253613)
-        </a>
-        via <em>Ferramentas → Complementos → Obter complementos</em>.
-      </p>
+                <h2
+                    style="
+                        font-size: 16px;
+                        font-weight: 500;
+                        margin: 24px 0 10px;
+                    "
+                >
+                    2. Copiar os cards
+                </h2>
+                <p style="margin-bottom: 8px">
+                    Para cada card que quiser adicionar:
+                </p>
+                <ol
+                    style="
+                        padding-left: 20px;
+                        line-height: 2;
+                        margin-bottom: 16px;
+                    "
+                >
+                    <li>Abra o dia desejado na trilha</li>
+                    <li>
+                        Clique em
+                        <strong>Copy Anki text (LaTeX included)</strong>
+                    </li>
+                    <li>
+                        Cole em um arquivo <code>.txt</code> (um card por linha)
+                    </li>
+                </ol>
 
-      <h2 style="font-size:16px;font-weight:500;margin:24px 0 10px">2. Copiar os cards</h2>
-      <p style="margin-bottom:8px">Para cada card que quiser adicionar:</p>
-      <ol style="padding-left:20px;line-height:2;margin-bottom:16px">
-        <li>Abra o dia desejado na trilha</li>
-        <li>Clique em <strong>Copy Anki text (LaTeX included)</strong></li>
-        <li>Cole em um arquivo <code>.txt</code> (um card por linha)</li>
-      </ol>
+                <h2
+                    style="
+                        font-size: 16px;
+                        font-weight: 500;
+                        margin: 24px 0 10px;
+                    "
+                >
+                    3. Importar no Anki
+                </h2>
+                <ol
+                    style="
+                        padding-left: 20px;
+                        line-height: 2;
+                        margin-bottom: 16px;
+                    "
+                >
+                    <li>No Anki: <em>Arquivo → Importar</em></li>
+                    <li>Selecione o arquivo <code>.txt</code></li>
+                    <li>Separador: <strong>Tab</strong></li>
+                    <li>Campo 1 → Frente, Campo 2 → Verso</li>
+                    <li>Clique em <strong>Importar</strong></li>
+                </ol>
 
-      <h2 style="font-size:16px;font-weight:500;margin:24px 0 10px">3. Importar no Anki</h2>
-      <ol style="padding-left:20px;line-height:2;margin-bottom:16px">
-        <li>No Anki: <em>Arquivo → Importar</em></li>
-        <li>Selecione o arquivo <code>.txt</code></li>
-        <li>Separador: <strong>Tab</strong></li>
-        <li>Campo 1 → Frente, Campo 2 → Verso</li>
-        <li>Clique em <strong>Importar</strong></li>
-      </ol>
+                <h2
+                    style="
+                        font-size: 16px;
+                        font-weight: 500;
+                        margin: 24px 0 10px;
+                    "
+                >
+                    4. Formato do LaTeX no Anki
+                </h2>
+                <p style="margin-bottom: 8px">
+                    Os cards usam a sintaxe padrão do MathJax:
+                </p>
+                <ul
+                    style="
+                        padding-left: 20px;
+                        line-height: 2;
+                        margin-bottom: 16px;
+                    "
+                >
+                    <li><code>\( ... \)</code> para equações inline</li>
+                    <li><code>\[ ... \]</code> para equações em bloco</li>
+                </ul>
+                <p>
+                    Se preferir o addon <em>LaTeX</em> nativo do Anki, substitua
+                    por <code>[latex] ... [/latex]</code>.
+                </p>
 
-      <h2 style="font-size:16px;font-weight:500;margin:24px 0 10px">4. Formato do LaTeX no Anki</h2>
-      <p style="margin-bottom:8px">
-        Os cards usam a sintaxe padrão do MathJax:
-      </p>
-      <ul style="padding-left:20px;line-height:2;margin-bottom:16px">
-        <li><code>\( ... \)</code> para equações inline</li>
-        <li><code>\[ ... \]</code> para equações em bloco</li>
-      </ul>
-      <p>
-        Se preferir o addon <em>LaTeX</em> nativo do Anki, substitua por
-        <code>[latex] ... [/latex]</code>.
-      </p>
+                <div
+                    style="
+                        margin-top: 28px;
+                        padding: 16px;
+                        background: var(--accent-bg);
+                        border-radius: var(--radius-md);
+                        border: 0.5px solid var(--border);
+                    "
+                >
+                    <strong style="color: var(--accent-dk)">Dica</strong>
+                    <p style="margin-top: 6px; color: var(--text)">
+                        O botão <em>LaTeX only</em> copia só a fórmula — útil
+                        para colar diretamente num card que você já criou
+                        manualmente.
+                    </p>
+                </div>
+            </div>
+        </main>
 
-      <div style="margin-top:28px;padding:16px;background:var(--accent-bg);border-radius:var(--radius-md);border:0.5px solid var(--border)">
-        <strong style="color:var(--accent-dk)">Dica</strong>
-        <p style="margin-top:6px;color:var(--text)">
-          O botão <em>LaTeX only</em> copia só a fórmula — útil para colar
-          diretamente num card que você já criou manualmente.
-        </p>
-      </div>
-    </div>
-  </main>
-
-  <footer class="site-footer">
-    <p>Repository <a href="https://github.com/" target="_blank" rel="noopener">GitHub</a> &nbsp;·&nbsp; Copyright &copy; 2025</p>
-  </footer>
-
-</body>
+        <footer class="site-footer">
+            <p>
+                Repository
+                <a href="https://github.com/" target="_blank" rel="noopener"
+                    >GitHub</a
+                >
+                &nbsp;·&nbsp; Copyright &copy; 2025
+            </p>
+        </footer>
+    </body>
 </html>
