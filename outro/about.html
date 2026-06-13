@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>About — ProbPath</title>
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+
+  <nav class="navbar" role="navigation" aria-label="Principal">
+    <a href="index.html" class="nav-brand">
+      <svg width="18" height="18" viewBox="0 0 24 24" fill="none"
+           stroke="currentColor" stroke-width="1.8" stroke-linecap="round"
+           stroke-linejoin="round" aria-hidden="true">
+        <path d="M3 3v18h18"/>
+        <path d="M7 16l4-4 4 4 4-6"/>
+      </svg>
+      ProbPath
+    </a>
+    <div class="nav-links">
+      <a href="index.html" class="nav-link">Home</a>
+      <a href="about.html" class="nav-link active">About</a>
+      <a href="anki-setup.html" class="nav-link">Anki setup</a>
+    </div>
+  </nav>
+
+  <main class="main" style="max-width:640px">
+    <h1 class="page-title" style="margin-bottom:20px">Sobre o projeto</h1>
+
+    <div style="font-size:15px;line-height:1.8;color:var(--text)">
+      <p style="margin-bottom:16px">
+        <strong>ProbPath</strong> é uma trilha de 30 dias de flashcards para memorizar
+        as principais distribuições de probabilidade usando o Anki.
+      </p>
+
+      <p style="margin-bottom:16px">
+        A progressão foi planejada por dependência conceitual: você começa com os
+        fundamentos (variância, FGM, assimetria) e vai avançando da distribuição de
+        Bernoulli até a distribuição Beta, sempre construindo sobre o que já aprendeu.
+      </p>
+
+      <p style="margin-bottom:16px">
+        Cada dia tem exatamente <strong>10 cards</strong>. O botão
+        <em>Copy Anki text</em> copia o par pergunta/resposta no formato correto
+        para importar no Anki via <em>File → Import</em> (separador: tab).
+      </p>
+
+      <h2 style="font-size:16px;font-weight:500;margin:28px 0 10px">Distribuições cobertas</h2>
+      <ul style="padding-left:20px;line-height:2">
+        <li>Fundamentos (variância, FGM, assimetria, curtose, séries)</li>
+        <li>Bernoulli e Binomial</li>
+        <li>Uniforme contínua</li>
+        <li>Exponencial</li>
+        <li>Normal</li>
+        <li>Gama e Qui-Quadrado</li>
+        <li>Beta e distribuição F</li>
+        <li>Revisão de relações entre distribuições</li>
+      </ul>
+
+      <h2 style="font-size:16px;font-weight:500;margin:28px 0 10px">Estrutura do projeto</h2>
+      <ul style="padding-left:20px;line-height:2">
+        <li><code>index.html</code> — página principal</li>
+        <li><code>cards.js</code> — todos os cards (fácil de editar e expandir)</li>
+        <li><code>app.js</code> — lógica de interação e localStorage</li>
+        <li><code>style.css</code> — estilos com suporte a dark mode</li>
+      </ul>
+    </div>
+  </main>
+
+  <footer class="site-footer">
+    <p>Repository <a href="https://github.com/" target="_blank" rel="noopener">GitHub</a> &nbsp;·&nbsp; Copyright &copy; 2025</p>
+  </footer>
+
+</body>
+</html>
