@@ -138,6 +138,36 @@
                               font-size: 11px;
                               color: #ddd;
                             }
+
+                            .fc-scene {
+                              width: min(92vw, 480px);  /* era 420px fixo */
+                              height: 260px;
+                              perspective: 1000px;
+                              cursor: pointer;
+                            }
+
+                            .fc-text {
+                              font-size: 16px;
+                              font-weight: 500;
+                              color: #e8e8e8;
+                              text-align: center;
+                              line-height: 1.6;
+                              max-width: 100%;
+                              overflow-x: auto;
+                              scrollbar-width: none;        /* Firefox */
+                            }
+                            .fc-text::-webkit-scrollbar {
+                              display: none;                 /* Chrome/Safari */
+                            }
+
+                            .fc-text mjx-container {
+                              overflow-x: auto;
+                              scrollbar-width: none;
+                              max-width: 100%;
+                            }
+                            .fc-text mjx-container::-webkit-scrollbar {
+                              display: none;
+                            }
                           </style>
 
                           <div class="fc-wrap" id="fc-wrap" style="display:none">
@@ -164,11 +194,11 @@
                             <div class="fc-copy">
                               <button class="copy-btn" id="btn-copy-front" onclick="copyFront(this)">
                                 <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="9" y="9" width="13" height="13" rx="2"/><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/></svg>
-                                Copiar pergunta (LaTeX)
+                                Copiar Frente
                               </button>
                               <button class="copy-btn" id="btn-copy-back" onclick="copyBack(this)">
                                 <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="9" y="9" width="13" height="13" rx="2"/><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/></svg>
-                                Copiar resposta (LaTeX)
+                                Copiar Verso
                               </button>
                             </div>
                           </div>
@@ -186,7 +216,7 @@
                 <line x1="12" y1="8" x2="12.01" y2="8"/>
               </svg>
               <p>
-                Às vezes o Anki não renderiza o LaTeX automaticamente. Nesses casos, apague os delimitadores <code>\[</code> e <code>\]</code>, selecione o texto em LaTeX e aperte <kbd>Ctrl</kbd>+<kbd>M</kbd>+<kbd>E</kbd> (fórmula destacada) ou <kbd>Ctrl</kbd>+<kbd>M</kbd>+<kbd>M</kbd> (fórmula em texto).
+                Às vezes o Anki não renderiza o LaTeX automaticamente. Nesses casos, apague os delimitadores <code>\[</code> e <code>\]</code>, selecione o texto em LaTeX e aperte <kbd>Ctrl</kbd>+<kbd>M</kbd>+<kbd>M</kbd> (fórmula em texto) ou <kbd>Ctrl</kbd>+<kbd>M</kbd>+<kbd>E</kbd> (fórmula destacada).
               </p>
             </div>
 
