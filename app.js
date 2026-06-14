@@ -236,9 +236,7 @@ async function addToAnki(btn) {
     btn.textContent = "Adicionado!";
   } catch (err) {
     btn.classList.add("error");
-    btn.textContent = err.message.includes("duplicate")
-      ? "Já existe!"
-      : "Erro — Anki aberto?";
+    btn.textContent = err.message.includes("duplicate") ? "Já existe!" : "Erro";
   } finally {
     setTimeout(() => {
       btn.disabled = false;
