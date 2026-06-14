@@ -130,6 +130,41 @@ function flipCard() {
   document.getElementById("fc-card").classList.toggle("flipped");
 }
 
+/* ── Copy helpers ────────────────────────────────────── */
+function stripHtml(html) {
+  return html
+    .replace(/&nbsp;/g, " ")
+    .replace(/<br\s*\/?>/gi, "\n")
+    .replace(/<[^>]+>/g, "")
+    .trim();
+}
+
+function flashBtn(btn) {
+  const original = btn.innerHTML;
+  btn.classList.add("ok");
+  btn.textContent = "Copiado!";
+  setTimeout(() => {
+    btn.classList.remove("ok");
+    btn.innerHTML = original;
+  }, 1400);
+}
+
+function copyToClipboard(text, btn) {
+  navigator.clipboard.writeText(text).then(() => flashBtn(btn));
+}
+
+function copyFront(btn) {
+  if (curDay === null) return;
+  const card = DAYS[curDay].cards[curCard];
+  copyToClipboard(stripHtml(card.q), btn);
+}
+
+function copyBack(btn) {
+  if (curDay === null) return;
+  const card = DAYS[curDay].cards[curCard];
+  copyToClipboard(stripHtml(card.a), btn);
+}
+
 /* ── Navigation ──────────────────────────────────────── */
 function prevCard() {
   if (curCard > 0) {

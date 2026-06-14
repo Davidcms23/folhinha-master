@@ -76,20 +76,6 @@
         <main class="main">
             <h1 class="page-title">Folhinha Master</h1>
 
-            <!-- Progress -->
-            <div class="progress-row">
-                <span class="progress-label" id="prog-label"
-                    >Progresso: Dia 1 de 3*</span
-                >
-                <div class="progress-track">
-                    <div
-                        class="progress-fill"
-                        id="prog-fill"
-                        style="width: 0%"
-                    ></div>
-                </div>
-            </div>
-
             <!-- Days grid -->
             <div
                 class="days-grid"
@@ -99,55 +85,112 @@
             ></div>
 
             <section class="panel" id="panel" aria-live="polite">
-              <style>
-                .fc-wrap { display: flex; flex-direction: column; align-items: center; gap: 24px; padding: 2rem 0; }
-                .fc-nav { display: flex; align-items: center; gap: 16px; }
-                .fc-nav button { background: #1e1e1e; border: 0.5px solid #3a3a3a; color: #e0e0e0; width: 40px; height: 40px; border-radius: 50%; font-size: 20px; cursor: pointer; display: flex; align-items: center; justify-content: center; transition: background 0.15s; }
-                .fc-nav button:hover { background: #2a2a2a; }
-                .fc-counter { font-size: 13px; color: #888; min-width: 48px; text-align: center; }
-                .fc-scene { width: 420px; height: 260px; perspective: 1000px; cursor: pointer; }
-                .fc-card { width: 100%; height: 100%; position: relative; transform-style: preserve-3d; transition: transform 0.55s cubic-bezier(.4,0,.2,1); }
-                .fc-card.flipped { transform: rotateY(180deg); }
-                .fc-face { position: absolute; width: 100%; height: 100%; backface-visibility: hidden; border-radius: 16px; display: flex; flex-direction: column; align-items: center; justify-content: center; padding: 2rem; box-sizing: border-box; }
-                .fc-front { background: #1a1a1a; border: 0.5px solid #333; }
-                .fc-back { background: #1e2a1e; border: 0.5px solid #2d4a2d; transform: rotateY(180deg); }
-                .fc-label { font-size: 11px; letter-spacing: 0.08em; text-transform: uppercase; margin-bottom: 16px; }
-                .fc-front .fc-label { color: #555; }
-                .fc-back .fc-label { color: #4a8a4a; }
-                .fc-text { font-size: 16px; font-weight: 500; color: #e8e8e8; text-align: center; line-height: 1.6; }
-                .fc-back .fc-text { color: #c8e8c8; }
-                .fc-hint { font-size: 12px; color: #444; margin-top: 20px; }
-              </style>
+                          <style>
+                            .fc-wrap { display: flex; flex-direction: column; align-items: center; gap: 18px; padding: 2rem 0; }
+                            .fc-nav { display: flex; align-items: center; gap: 16px; }
+                            .fc-nav button { background: #1e1e1e; border: 0.5px solid #3a3a3a; color: #e0e0e0; width: 40px; height: 40px; border-radius: 50%; font-size: 20px; cursor: pointer; display: flex; align-items: center; justify-content: center; transition: background 0.15s; }
+                            .fc-nav button:hover { background: #2a2a2a; }
+                            .fc-counter { font-size: 13px; color: #888; min-width: 48px; text-align: center; }
+                            .fc-scene { width: 420px; height: 260px; perspective: 1000px; cursor: pointer; }
+                            .fc-card { width: 100%; height: 100%; position: relative; transform-style: preserve-3d; transition: transform 0.55s cubic-bezier(.4,0,.2,1); }
+                            .fc-card.flipped { transform: rotateY(180deg); }
+                            .fc-face { position: absolute; width: 100%; height: 100%; backface-visibility: hidden; border-radius: 16px; display: flex; flex-direction: column; align-items: center; justify-content: center; padding: 2rem; box-sizing: border-box; }
+                            .fc-front { background: #1a1a1a; border: 0.5px solid #333; }
+                            .fc-back { background: #1e2a1e; border: 0.5px solid #2d4a2d; transform: rotateY(180deg); }
+                            .fc-label { font-size: 11px; letter-spacing: 0.08em; text-transform: uppercase; margin-bottom: 16px; }
+                            .fc-front .fc-label { color: #555; }
+                            .fc-back .fc-label { color: #4a8a4a; }
+                            .fc-text { font-size: 16px; font-weight: 500; color: #e8e8e8; text-align: center; line-height: 1.6; }
+                            .fc-back .fc-text { color: #c8e8c8; }
+                            .fc-hint { font-size: 12px; color: #444; margin-top: 20px; }
+                            .fc-copy { display: flex; gap: 12px; }
+                            .copy-btn { background: #1e1e1e; border: 0.5px solid #3a3a3a; color: #aaa; font-size: 12px; padding: 8px 14px; border-radius: 8px; cursor: pointer; display: flex; align-items: center; gap: 6px; transition: background 0.15s, color 0.15s, border-color 0.15s; font-family: inherit; }
+                            .copy-btn:hover { background: #2a2a2a; color: #ddd; }
+                            .copy-btn.ok { color: #6fbf6f; border-color: #2d4a2d; }
+                            .anki-tip {
+                              display: flex;
+                              gap: 12px;
+                              align-items: flex-start;
+                              max-width: 420px;
+                              margin: 28px auto 0;
+                              padding: 14px 16px;
+                              background: #1a1a1a;
+                              border: 0.5px solid #333;
+                              border-radius: 12px;
+                              font-size: 13px;
+                              color: #999;
+                              line-height: 1.6;
+                            }
+                            .anki-tip svg { flex-shrink: 0; margin-top: 2px; color: #666; }
+                            .anki-tip code {
+                              background: #2a2a2a;
+                              color: #ddd;
+                              padding: 1px 5px;
+                              border-radius: 4px;
+                              font-family: monospace;
+                            }
+                            .anki-tip kbd {
+                              background: #2a2a2a;
+                              border: 0.5px solid #444;
+                              border-radius: 4px;
+                              padding: 1px 5px;
+                              font-family: monospace;
+                              font-size: 11px;
+                              color: #ddd;
+                            }
+                          </style>
 
-              <div class="fc-wrap" id="fc-wrap" style="display:none">
-                <div class="fc-scene" onclick="flipCard()" id="fc-scene">
-                  <div class="fc-card" id="fc-card">
-                    <div class="fc-face fc-front">
-                      <span class="fc-label">pergunta</span>
-                      <p class="fc-text" id="card-q"></p>
-                      <span class="fc-hint">clique para revelar</span>
-                    </div>
-                    <div class="fc-face fc-back">
-                      <span class="fc-label">resposta</span>
-                      <p class="fc-text" id="card-a"></p>
-                    </div>
-                  </div>
-                </div>
+                          <div class="fc-wrap" id="fc-wrap" style="display:none">
+                            <div class="fc-scene" onclick="flipCard()" id="fc-scene">
+                              <div class="fc-card" id="fc-card">
+                                <div class="fc-face fc-front">
+                                  <span class="fc-label">pergunta</span>
+                                  <p class="fc-text" id="card-q"></p>
+                                  <span class="fc-hint">clique para revelar</span>
+                                </div>
+                                <div class="fc-face fc-back">
+                                  <span class="fc-label">resposta</span>
+                                  <p class="fc-text" id="card-a"></p>
+                                </div>
+                              </div>
+                            </div>
 
-                <div class="fc-nav">
-                  <button onclick="prevCard()" aria-label="Card anterior">&#8249;</button>
-                  <span class="fc-counter" id="card-counter"></span>
-                  <button onclick="nextCard()" aria-label="Próximo card">&#8250;</button>
-                </div>
-              </div>
-            </section>
+                            <div class="fc-nav">
+                              <button onclick="prevCard()" aria-label="Card anterior">&#8249;</button>
+                              <span class="fc-counter" id="card-counter"></span>
+                              <button onclick="nextCard()" aria-label="Próximo card">&#8250;</button>
+                            </div>
+
+                            <div class="fc-copy">
+                              <button class="copy-btn" id="btn-copy-front" onclick="copyFront(this)">
+                                <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="9" y="9" width="13" height="13" rx="2"/><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/></svg>
+                                Copiar pergunta (LaTeX)
+                              </button>
+                              <button class="copy-btn" id="btn-copy-back" onclick="copyBack(this)">
+                                <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="9" y="9" width="13" height="13" rx="2"/><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/></svg>
+                                Copiar resposta (LaTeX)
+                              </button>
+                            </div>
+                          </div>
+                        </section>
 
             <!-- Empty state -->
             <div class="empty-state" id="empty-state" role="status">
-              ← Clique em um dia para ver os cards
+              Clique em um dia para ver os cards
             </div>
 
-        <!-- ── Footer ───────────────────────────────── -->
+            <div class="anki-tip">
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                <circle cx="12" cy="12" r="10"/>
+                <line x1="12" y1="16" x2="12" y2="12"/>
+                <line x1="12" y1="8" x2="12.01" y2="8"/>
+              </svg>
+              <p>
+                Às vezes o Anki não renderiza o LaTeX automaticamente. Nesses casos, apague os delimitadores <code>\[</code> e <code>\]</code>, selecione o texto em LaTeX e aperte <kbd>Ctrl</kbd>+<kbd>M</kbd>+<kbd>E</kbd> (fórmula destacada) ou <kbd>Ctrl</kbd>+<kbd>M</kbd>+<kbd>M</kbd> (fórmula em texto).
+              </p>
+            </div>
+
+            <!-- ── Footer ───────────────────────────────── -->
         <footer class="site-footer">
             <p>
                 Repository
