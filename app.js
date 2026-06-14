@@ -197,3 +197,53 @@ function markDone() {
 
 /* ── Init ────────────────────────────────────────────── */
 renderGrid();
+
+/* ── AnkiConnect ─────────────────────────────────────── */
+const ANKI_URL = "http://127.0.0.1:8765";
+const ANKI_DECK = "folhinha";
+
+async function ankiInvoke(action, params = {}) {
+  const res = await fetch(ANKI_URL, {
+    method: "POST",
+    body: JSON.stringify({ action, version: 6, params }),
+  });
+  const data = await res.json();
+  if (data.error) throw new Error(data.error);
+  return data.result;
+}
+
+async function addToAnki(btn) {
+  if (curDay === null) return;
+  const card = DAYS[curDay].cards[curCard];
+  const original = btn.innerHTML;
+  btn.disabled = true;
+
+  try {
+    await ankiInvoke("createDeck", { deck: ANKI_DECK });
+    await ankiInvoke("addNote", {
+      note: {
+        deckName: ANKI_DECK,
+        modelName: "Basic",
+        fields: {
+          Front: stripHtml(card.q),
+          Back: stripHtml(card.a),
+        },
+        options: { allowDuplicate: false },
+        tags: ["folhinha-master", `dia-${curDay + 1}`],
+      },
+    });
+    btn.classList.add("ok");
+    btn.textContent = "Adicionado!";
+  } catch (err) {
+    btn.classList.add("error");
+    btn.textContent = err.message.includes("duplicate")
+      ? "Já existe!"
+      : "Erro — Anki aberto?";
+  } finally {
+    setTimeout(() => {
+      btn.disabled = false;
+      btn.classList.remove("ok", "error");
+      btn.innerHTML = original;
+    }, 1800);
+  }
+}
