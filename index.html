@@ -3,36 +3,12 @@
     <head>
         <meta charset="UTF-8" />
         <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-        <title>FMaster</title>
-        <meta
-            name="description"
-            content="Trilha de 30 dias de flashcards para memorizar distribuições de probabilidade no Anki."
-        />
-        <link rel="stylesheet" href="style.css" />
-
-        <!-- MathJax -->
-        <script>
-            window.MathJax = {
-                tex: {
-                    inlineMath: [["\\(", "\\)"]],
-                    displayMath: [["\\[", "\\]"]],
-                },
-                startup: {
-                    ready() {
-                        MathJax.startup.defaultReady();
-                    },
-                },
-            };
-        </script>
-        <script
-            src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml.js"
-            defer
-        ></script>
+        <title>FMaster - Baralho</title>
+        <link rel="stylesheet" href="../style.css" />
     </head>
     <body>
-        <!-- ── Navbar ───────────────────────────────── -->
         <nav class="navbar" role="navigation" aria-label="Principal">
-            <a href="./" class="nav-brand">
+            <a href="/" class="nav-brand">
                 <svg
                     width="18"
                     height="18"
@@ -72,161 +48,36 @@
             </div>
         </nav>
 
-        <!-- ── Main ─────────────────────────────────── -->
-        <main class="main">
-            <h1 class="page-title">Masterizando a Folhinha</h1>
+        <main class="main" style="max-width: 640px">
+            <h1 class="page-title" style="margin-bottom: 20px">
+                Como usar o baralho no Anki
+            </h1>
 
-            <!-- Days grid -->
-            <div
-                class="days-grid"
-                id="days-grid"
-                role="list"
-                aria-label="Dias da trilha"
-            ></div>
+            <h1 class="page-title" style="margin-bottom: 20px">PC</h1>
 
-            <section class="panel" id="panel" aria-live="polite">
-                          <style>
-                            .fc-wrap { display: flex; flex-direction: column; align-items: center; gap: 18px; padding: 2rem 0; }
-                            .fc-nav { display: flex; align-items: center; gap: 16px; }
-                            .fc-nav button { background: #1e1e1e; border: 0.5px solid #3a3a3a; color: #e0e0e0; width: 40px; height: 40px; border-radius: 50%; font-size: 20px; cursor: pointer; display: flex; align-items: center; justify-content: center; transition: background 0.15s; }
-                            .fc-nav button:hover { background: #2a2a2a; }
-                            .fc-counter { font-size: 13px; color: #888; min-width: 48px; text-align: center; }
-                            .fc-scene { width: 420px; height: 260px; perspective: 1000px; cursor: pointer; }
-                            .fc-card { width: 100%; height: 100%; position: relative; transform-style: preserve-3d; transition: transform 0.55s cubic-bezier(.4,0,.2,1); }
-                            .fc-card.flipped { transform: rotateY(180deg); }
-                            .fc-face { position: absolute; width: 100%; height: 100%; backface-visibility: hidden; border-radius: 16px; display: flex; flex-direction: column; align-items: center; justify-content: center; padding: 2rem; box-sizing: border-box; }
-                            .fc-front { background: #1a1a1a; border: 0.5px solid #333; }
-                            .fc-back { background: #1a1a1a; border: 0.5px solid #333; transform: rotateY(180deg); }
-                            .fc-label { font-size: 11px; letter-spacing: 0.08em; text-transform: uppercase; margin-bottom: 16px; }
-                            .fc-front .fc-label { color: #555; }
-                            .fc-back .fc-label { color: #555; }
-                            .fc-text { font-size: 16px; font-weight: 500; color: #e8e8e8; text-align: center; line-height: 1.6; }
-                            .fc-back .fc-text { color: #e8e8e8; }
-                            .fc-hint { font-size: 12px; color: #444; margin-top: 20px; }
-                            .fc-copy { display: flex; gap: 12px; }
-                            .copy-btn { background: #1e1e1e; border: 0.5px solid #3a3a3a; color: #aaa; font-size: 12px; padding: 8px 14px; border-radius: 8px; cursor: pointer; display: flex; align-items: center; gap: 6px; transition: background 0.15s, color 0.15s, border-color 0.15s; font-family: inherit; }
-                            .copy-btn:hover { background: #2a2a2a; color: #ddd; }
-                            .copy-btn.ok { color: #6fbf6f; border-color: #2d4a2d; }
-                            .copy-btn.error { color: #d97777; border-color: #4a2d2d; }
-                            .copy-btn:disabled { opacity: 0.6; cursor: default; }
-                            .anki-tip {
-                              display: flex;
-                              gap: 12px;
-                              align-items: flex-start;
-                              max-width: 420px;
-                              margin: 28px auto 0;
-                              padding: 14px 16px;
-                              background: #1a1a1a;
-                              border: 0.5px solid #333;
-                              border-radius: 12px;
-                              font-size: 13px;
-                              color: #999;
-                              line-height: 1.6;
-                            }
-                            .anki-tip svg { flex-shrink: 0; margin-top: 2px; color: #666; }
-                            .anki-tip code {
-                              background: #2a2a2a;
-                              color: #ddd;
-                              padding: 1px 5px;
-                              border-radius: 4px;
-                              font-family: monospace;
-                            }
-                            .anki-tip kbd {
-                              background: #2a2a2a;
-                              border: 0.5px solid #444;
-                              border-radius: 4px;
-                              padding: 1px 5px;
-                              font-family: monospace;
-                              font-size: 11px;
-                              color: #ddd;
-                            }
-
-                            .fc-scene {
-                              width: min(92vw, 480px);  /* era 420px fixo */
-                              height: 260px;
-                              perspective: 1000px;
-                              cursor: pointer;
-                            }
-
-                            .fc-text {
-                              font-size: 16px;
-                              font-weight: 500;
-                              color: #e8e8e8;
-                              text-align: center;
-                              line-height: 1.6;
-                              max-width: 100%;
-                              overflow-x: auto;
-                              scrollbar-width: none;        /* Firefox */
-                            }
-                            .fc-text::-webkit-scrollbar {
-                              display: none;                 /* Chrome/Safari */
-                            }
-
-                            .fc-text mjx-container {
-                              overflow-x: auto;
-                              scrollbar-width: none;
-                              max-width: 100%;
-                            }
-                            .fc-text mjx-container::-webkit-scrollbar {
-                              display: none;
-                            }
-                          </style>
-
-                          <div class="fc-wrap" id="fc-wrap" style="display:none">
-                            <div class="fc-scene" onclick="flipCard()" id="fc-scene">
-                              <div class="fc-card" id="fc-card">
-                                <div class="fc-face fc-front">
-                                  <span class="fc-label">pergunta</span>
-                                  <p class="fc-text" id="card-q"></p>
-                                  <span class="fc-hint">clique para revelar</span>
-                                </div>
-                                <div class="fc-face fc-back">
-                                  <span class="fc-label">resposta</span>
-                                  <p class="fc-text" id="card-a"></p>
-                                </div>
-                              </div>
-                            </div>
-
-                            <div class="fc-nav">
-                              <button onclick="prevCard()" aria-label="Card anterior">&#8249;</button>
-                              <span class="fc-counter" id="card-counter"></span>
-                              <button onclick="nextCard()" aria-label="Próximo card">&#8250;</button>
-                            </div>
-
-                            <div class="fc-copy">
-                              <button class="copy-btn" id="btn-copy-front" onclick="copyFront(this)">
-                                <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="9" y="9" width="13" height="13" rx="2"/><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/></svg>
-                                Copiar Frente
-                              </button>
-                              <button class="copy-btn" id="btn-anki-add" onclick="addToAnki(this)">
-                                <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg>
-                                Adicionar ao Anki
-                              </button>
-                              <button class="copy-btn" id="btn-copy-back" onclick="copyBack(this)">
-                                <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="9" y="9" width="13" height="13" rx="2"/><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/></svg>
-                                Copiar Verso
-                              </button>
-                            </div>
-                          </div>
-                        </section>
-
-            <!-- Empty state -->
-            <div class="empty-state" id="empty-state" role="status">
-              Clique em um dia para ver os cards
+            <div style="font-size: 15px; line-height: 1.8; color: var(--text)">
+                Instale a extensão AnkiConnect (2055492159) no seu anki e
+                importe o baralho.
             </div>
 
-            <div class="anki-tip">
-              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
-                <circle cx="12" cy="12" r="10"/>
-                <line x1="12" y1="16" x2="12" y2="12"/>
-                <line x1="12" y1="8" x2="12.01" y2="8"/>
-              </svg>
-              <p>
-                Às vezes o Anki não renderiza o LaTeX automaticamente. Nesses casos, apague os delimitadores <code>\[</code> e <code>\]</code>, selecione o texto em LaTeX e aperte <kbd>Ctrl</kbd>+<kbd>M</kbd>+<kbd>M</kbd> (fórmula em texto) ou <kbd>Ctrl</kbd>+<kbd>M</kbd>+<kbd>E</kbd> (fórmula destacada).
-              </p>
-            </div>
+            <h1 class="page-title" style="margin-bottom: 20px">Mobile</h1>
 
-            <!-- ── Footer ───────────────────────────────── -->
+            <div style="font-size: 15px; line-height: 1.8; color: var(--text)">
+                É recomendado que você construa o seu baralho diariamente,
+                adicionando 10 cards por dia, ou a quantidade que conseguir. Mas
+                você também pode importar todo o baralho de uma vez. Para
+                importar todo o baralho, basta baixar o arquivo
+                <code>.txt</code> ou <code>.apkg</code> e importá-lo no Anki. O
+                ideal é que você crie um baralho vazio no Anki e adicione os
+                cards manualmente, seguindo a trilha de aprendizado diária.
+                Assim, você revisará os cards de forma adequada e não se sentirá
+                sobrecarregado com a quantidade de conteúdo. Além disso, é
+                importante revisar os cards todos os dias para evitar o acúmulo
+                de revisões. Instale a extensão AnkiConnect (2055492159) no seu
+                anki e importe o baralho.
+            </div>
+        </main>
+
         <footer class="site-footer">
             <p>
                 Repository
@@ -235,8 +86,5 @@
                 >
             </p>
         </footer>
-
-        <script src="cards.js"></script>
-        <script src="app.js"></script>
     </body>
 </html>
