@@ -1,19 +1,59 @@
 const DAYS = [
   {
-    label: "Fundamentos",
-    topic: "Operadores, séries e medidas",
-    tag: "base",
+    label: "Distribuição Beta",
+    topic: "Distribuições Contínuas",
+    tag: "beta",
     cards: [
-      { q: "Definição e fórmula de cálculo prático da Variância \\(\\text{Var}(X)\\)", a: "\\[\\text{Var}(X)=\\mathbb{E}[(X-\\mathbb{E}(X))^2]=\\mathbb{E}(X^2)-\\mathbb{E}^2(X)\\]", raw: "\\text{Var}(X) = \\mathbb{E}(X^2) - \\mathbb{E}^2(X)" },
-      { q: "FGM \\(M_X(t)\\) e Função Característica \\(\\varphi_X(t)\\) em termos de esperança", a: "\\[M_X(t)=\\mathbb{E}(e^{tX})\\quad\\varphi_X(t)=\\mathbb{E}(e^{itX})\\]", raw: "M_X(t)=\\mathbb{E}(e^{tX})" },
-      { q: "Definição do quantil \\(x_p\\) e relação com a Mediana", a: "\\[x_p=F^{-1}(p)\\Rightarrow\\text{Med}(X)=x_{1/2}\\]", raw: "x_p = F^{-1}(p)" },
-      { q: "Fórmula da Assimetria \\(A(X)\\) via momento central de 3ª ordem", a: "\\[A(X)=\\frac{\\mathbb{E}[(X-\\mathbb{E}(X))^3]}{\\text{Var}(X)^{3/2}}\\]", raw: "A(X) = \\mu_3 / \\sigma^3" },
-      { q: "Interpretação: \\(A(X)<0\\), \\(A(X)>0\\), \\(A(X)=0\\)", a: "\\(A<0\\): cauda à esquerda &nbsp;·&nbsp; \\(A>0\\): cauda à direita &nbsp;·&nbsp; \\(A=0\\): simétrica", raw: "A<0: cauda esq | A>0: cauda dir | A=0: simetrica" },
-      { q: "Fórmula do excesso de Curtose \\(K(X)\\)", a: "\\[K(X)=\\frac{\\mathbb{E}[(X-\\mathbb{E}(X))^4]}{\\text{Var}(X)^2}-3\\]", raw: "K(X) = \\mu_4/\\sigma^4 - 3" },
-      { q: "Classificação: \\(K<0\\), \\(K>0\\), \\(K=0\\)", a: "\\(K<0\\): platicúrtica &nbsp;·&nbsp; \\(K>0\\): leptocúrtica &nbsp;·&nbsp; \\(K=0\\): mesocúrtica", raw: "K<0: plat | K>0: lepto | K=0: meso" },
-      { q: "Soma finita de uma P.G.", a: "\\[S=\\frac{a_1(1-q^n)}{1-q}\\]", raw: "S = a_1(1-q^n)/(1-q)" },
-      { q: "Soma infinita de uma P.G. convergente \\((|q|<1)\\)", a: "\\[S=\\frac{a_1}{1-q}\\]", raw: "S = a_1/(1-q)" },
-      { q: "Resultado de \\(\\sum_{i=1}^n i^2\\)", a: "\\[\\sum_{i=1}^n i^2=\\frac{n(n+1)(2n+1)}{6}\\]", raw: "\\sum_{i=1}^n i^2 = n(n+1)(2n+1)/6" }
-    ]
-  }
+      {
+        q: "Função de densidade da \\(Beta(a,b)\\)",
+        a: "\\[f(x)=\\frac{1}{B(a,b)}x^{a-1}(1-x)^{b-1}\\mathbb{I}_{(0,1)}(x)\\]",
+        raw: "f(x) = x^{a-1}(1-x)^{b-1}/B(a,b)",
+      },
+      {
+        q: "Esperança e Variância da \\(Beta(a,b)\\)",
+        a: "\\[\\mathbb{E}(X)=\\frac{a}{a+b}\\quad\\text{Var}(X)=\\frac{ab}{(a+b)^2(a+b+1)}\\]",
+        raw: "E(X)=a/(a+b), Var(X)=ab/(a+b)^2(a+b+1)",
+      },
+      {
+        q: "Momento de ordem \\(k\\) da \\(Beta(a,b)\\)",
+        a: "\\[\\mathbb{E}(X^k)=\\frac{\\Gamma(a+b)\\,\\Gamma(a+k)}{\\Gamma(a+b+k)\\,\\Gamma(a)}\\]",
+        raw: "E(X^k) = Gamma(a+b)Gamma(a+k) / Gamma(a+b+k)Gamma(a)",
+      },
+      {
+        q: "Assimetria \\(A(X)\\) da \\(Beta(a,b)\\)",
+        a: "\\[A(X)=\\frac{2(b-a)\\sqrt{a+b+1}}{(a+b+2)\\sqrt{ab}}\\]",
+        raw: "A(X) = 2(b-a)sqrt(a+b+1) / (a+b+2)sqrt(ab)",
+      },
+      {
+        q: "Curtose \\(K(X)\\) da \\(Beta(a,b)\\)",
+        a: "\\[K(X)=\\frac{3(a+b+1)\\left[2(a+b)^2+ab(a+b+6)\\right]}{ab(a+b+2)(a+b+3)}\\]",
+        raw: "K(X) = 3(a+b+1)[2(a+b)^2 + ab(a+b+6)] / ab(a+b+2)(a+b+3)",
+      },
+      {
+        q: "Moda da \\(Beta(a,b)\\)",
+        a: "\\[\\text{Mo}(X)=\\begin{cases}\\dfrac{a-1}{a+b-2}&\\text{se }a,b>1\\\\0&\\text{se }a\\leq1,\\,b>1\\\\1&\\text{se }a>1,\\,b\\leq1\\\\0\\text{ e }1&\\text{se }a,b<1\\end{cases}\\]",
+        raw: "Mo(X) = (a-1)/(a+b-2) se a,b > 1",
+      },
+      {
+        q: "Se \\(X\\sim Beta(a,b)\\), qual a distribuição de \\(Y=1-X\\)?",
+        a: "\\[Y=1-X\\sim Beta(b,a)\\]",
+        raw: "1-X ~ Beta(b,a)",
+      },
+      {
+        q: "Se \\(X\\sim Beta(a,b)\\), qual a distribuição de \\(Y=\\dfrac{X}{1-X}\\)?",
+        a: "\\[Y=\\frac{X}{1-X}\\sim BP(a,b)\\]",
+        raw: "X/(1-X) ~ BP(a,b)",
+      },
+      {
+        q: "Se \\(X\\sim Beta\\!\\left(\\tfrac{n}{2},\\tfrac{m}{2}\\right)\\), qual a distribuição de \\(Y=\\dfrac{mX}{n(1-X)}\\)?",
+        a: "\\[Y=\\frac{mX}{n(1-X)}\\sim F(n,m)\\]",
+        raw: "mX/n(1-X) ~ F(n,m)",
+      },
+      {
+        q: "Se \\(X\\sim Beta(a,1)\\), qual a distribuição de \\(Y=-\\ln X\\)?",
+        a: "\\[Y=-\\ln X\\sim Exp(a)\\]",
+        raw: "-ln(X) ~ Exp(a)",
+      },
+    ],
+  },
 ];
