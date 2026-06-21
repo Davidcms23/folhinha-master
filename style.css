@@ -111,15 +111,62 @@ body {
 
 /* ── Main ─────────────────────────────────────── */
 .main {
-    max-width: 860px;
+    max-width: 1000px;
     margin: 0 auto;
-    padding: 28px 24px 60px;
+    padding: 40px 40px 80px;
 }
 
 .page-title {
     font-size: 20px;
     font-weight: 500;
     margin-bottom: 4px;
+}
+
+/* ── Tipografia e Espaçamento (Main) ──────────────────── */
+.main {
+    max-width: 640px; /* era 860px — mais confortável para leitura */
+    margin: 0 auto;
+    padding: 40px 24px 80px;
+}
+
+.page-title {
+    font-size: 22px;
+    font-weight: 600;
+    margin-bottom: 28px;
+}
+
+.section-title {
+    font-size: 17px;
+    font-weight: 600;
+    margin-top: 40px;
+    margin-bottom: 12px;
+    color: var(--text);
+}
+
+.subsection-title {
+    font-size: 14px;
+    font-weight: 600;
+    margin-top: 24px;
+    margin-bottom: 8px;
+    color: var(--muted);
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+}
+
+.main p {
+    font-size: 15px;
+    line-height: 1.8;
+    color: var(--text);
+    margin-bottom: 20px;
+}
+
+.main p:last-child {
+    margin-bottom: 0;
+}
+
+.main cite {
+    font-style: italic;
+    color: var(--muted);
 }
 
 /* ── Progress ─────────────────────────────────── */
@@ -156,7 +203,7 @@ body {
 .days-grid {
     display: grid;
     grid-template-columns: repeat(6, 1fr);
-    gap: 8px;
+    gap: 12px;
     margin-bottom: 24px;
 }
 
@@ -164,12 +211,12 @@ body {
     background: var(--surface);
     border: 0.5px solid var(--border);
     border-radius: var(--radius-md);
-    padding: 10px 12px;
+    padding: 14px 16px;
     cursor: pointer;
     transition:
         border-color 0.15s,
         background 0.15s;
-    min-height: 66px;
+    min-height: 80px;
     display: flex;
     flex-direction: column;
     gap: 4px;
@@ -193,7 +240,7 @@ body {
 }
 
 .dc-num {
-    font-size: 11px;
+    font-size: 12px;
     color: var(--muted);
 }
 
@@ -203,7 +250,7 @@ body {
 }
 
 .dc-label {
-    font-size: 12px;
+    font-size: 13px;
     font-weight: 500;
     color: var(--text);
     line-height: 1.3;
